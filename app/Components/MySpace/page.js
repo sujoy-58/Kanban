@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FiCheck,
@@ -19,7 +19,22 @@ import Chart from "chart.js/auto";
 
 const MySpace = ({ tasks = [] }) => {
   const [searchOpen, setSearchOpen] = useState(false);
-  const [hoverAdd, setHoverAdd] = useState(false);
+  const [addOpen, setAddOpen] = useState(false);
+  const [stngOpen, setStngOpen] = useState(false);
+
+  // const [isOpen, setIsOpen] = useState(false);
+  // const buttonRef = useRef();
+
+  // // Collapse on click outside
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (buttonRef.current && !buttonRef.current.contains(event.target)) {
+  //       setIsOpen(false);
+  //     }
+  //   };
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => document.removeEventListener("mousedown", handleClickOutside);
+  // }, []);
 
   // Cumulative report state
   const [report, setReport] = useState({
@@ -110,92 +125,65 @@ const MySpace = ({ tasks = [] }) => {
       {/* --- Top Utility Bar --- */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-semibold text-white/90">My Space</h2>
-    <div className="flex items-center gap-3">
-      {/* SEARCH BUTTON */}
-      <motion.div
-        className="relative flex items-center"
-        initial={{ width: "40px" }}
-        animate={{ width: searchOpen ? "180px" : "40px" }}
-        transition={{ type: "spring", stiffness: 200, damping: 20 }}
-      >
-        <AnimatePresence mode="wait">
-          {!searchOpen ? (
-            <motion.button
-              key="searchButton"
-              whileHover={{ scale: 1.1 }}
-              onClick={() => setSearchOpen(true)}
-              className="flex justify-center items-center rounded-full p-2 bg-white/10 border border-white/20 backdrop-blur-md text-white/80 hover:bg-white/20 transition w-[40px] h-[40px]"
-            >
-              <FiSearch size={18} />
-            </motion.button>
-          ) : (
-            <motion.input
-              key="searchInput"
-              type="text"
-              autoFocus
-              placeholder="Search..."
-              initial={{ opacity: 0, width: 40 }}
-              animate={{ opacity: 1, width: 180 }}
-              exit={{ opacity: 0, width: 40 }}
-              transition={{ duration: 0.3 }}
-              className="pl-10 pr-3 py-1 ml-2 h-[40px] text-sm bg-white/10 border border-white/20 backdrop-blur-md text-white/90 rounded-full outline-none w-full"
-              onBlur={() => setSearchOpen(false)}
-            />
-          )}
-        </AnimatePresence>
-
-        {/* Search Icon inside expanded input */}
-        {searchOpen && (
+        <div className="flex items-center gap-3">
+          {/* SEARCH BUTTON */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="absolute left-2 text-white/70 pointer-events-none"
+            className="relative flex items-center justify-center"
+            initial={{ width: "40px" }}
+            animate={{ width: searchOpen ? "180px" : "40px" }}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
           >
-            <FiSearch size={16} />
+            <AnimatePresence mode="wait">
+              {!searchOpen ? (
+                // CLOSED STATE BUTTON
+                <motion.button
+                  key="searchButton"
+                  whileHover={{ scale: 1.1 }}
+                  onClick={() => setSearchOpen(true)}
+                  className="flex justify-center items-center rounded-full p-2 bg-white/10 border border-white/20 backdrop-blur-md text-white/80 hover:bg-white/20 transition w-[40px] h-[40px] relative"
+                  title="Search" // tooltip on hover
+                >
+                  <FiSearch size={18} />
+                </motion.button>
+              ) : (
+                // OPEN STATE INPUT
+                <motion.input
+                  key="searchInput"
+                  type="text"
+                  autoFocus
+                  placeholder="Search..."
+                  initial={{ opacity: 0, width: 40 }}
+                  animate={{ opacity: 1, width: 180 }}
+                  exit={{ opacity: 0, width: 40 }}
+                  transition={{ duration: 0.3 }}
+                  className="pl-6 pr-3 py-1 h-[40px] text-sm bg-white/10 border border-white/20 backdrop-blur-md text-white/90 rounded-full outline-none w-full"
+                  onBlur={() => setSearchOpen(false)}
+                />
+              )}
+            </AnimatePresence>
           </motion.div>
-        )}
-      </motion.div>
 
-      {/* ADD BUTTON (Expands on Hover) */}
-      <motion.div
-        className="relative flex items-center"
-        onHoverStart={() => setHoverAdd(true)}
-        onHoverEnd={() => setHoverAdd(false)}
-        animate={{ width: hoverAdd ? "160px" : "40px" }}
-        transition={{ type: "spring", stiffness: 200, damping: 20 }}
-      >
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          className="flex justify-center items-center rounded-full p-2 bg-white/10 border border-white/20 backdrop-blur-md text-white/80 hover:bg-white/20 transition w-[40px] h-[40px]"
-        >
-          <FiPlus size={18} />
-        </motion.button>
+          {/* Add BUTTON */}
 
-        <AnimatePresence>
-          {hoverAdd && (
-            <motion.span
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -10 }}
-              transition={{ duration: 0.25 }}
-              className="absolute left-10 text-sm text-white/90"
-            >
-              Add Project
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </motion.div>
+          <motion.button
+            onClick={() => alert("Add Workspace?")} // to be implemented
+            className=" w-24 flex items-center text-sm gap-1 px-3 py-2 h-[40px] bg-white/10 border border-white/20 backdrop-blur-md text-white/80 hover:bg-white/20 rounded-full outline-none"
+            whileHover={{ scale: 1.1 }}
+          >
+            <FiPlus size={18} /> Add Task
+          </motion.button>
 
-      {/* SETTINGS BUTTON */}
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        className="rounded-full p-2 bg-white/10 border border-white/20 backdrop-blur-md text-white/80 hover:bg-white/20 transition w-[40px] h-[40px]"
-      >
-        <FiSettings size={18} />
-      </motion.button>
-    </div>
+          {/* SETTINGS BUTTON */}
+
+          <motion.button
+            onClick={() => alert("open settings")} // to be implemented
+            className=" w-24 flex items-center text-sm gap-1 px-3 py-2 h-[40px] bg-white/10 border border-white/20 backdrop-blur-md text-white/80 hover:bg-white/20 rounded-full outline-none"
+            whileHover={{ scale: 1.1 }}
+          >
+            <FiSettings size={18} /> Settings
+          </motion.button>
+
+        </div>
       </div>
 
       {/* --- Cumulative Report Cards --- */}

@@ -22,7 +22,7 @@ import {
 import { SlSettings, SlQuestion } from "react-icons/sl";
 import { MdOutlineTaskAlt } from "react-icons/md";
 import { mainMenuConfig } from "../config/menuConfig";
-import { useProject } from "@/app/context/ProjectContext";
+import { useProject } from "../context/ProjectContext";
 
 const Mainsidebar = () => {
   const {
@@ -319,7 +319,7 @@ const Mainsidebar = () => {
                     className="flex items-center justify-between w-full"
                   >
                     <h3 className="text-[12px] text-white/60 font-medium">
-                      WORKSPACES
+                      MY PROJECTS
                     </h3>
                     {showPages ? (
                       <FiChevronUp className="text-white/60" />
