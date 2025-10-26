@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import Mainsidebar from "./Components/Mainsidebar";
+import { ProjectProvider } from "./context/ProjectContext";
+import { Toaster } from "sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,12 +25,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div style={{ display: "flex", height: "100vh", overflow: "hidden" }}>
-          <Mainsidebar />
-          <div style={{ flex: 1, overflowY: "auto" }}>
-            {children}
-          </div>
-        </div>
+        <ProjectProvider>{children}
+          
+        </ProjectProvider>
       </body>
     </html>
   );

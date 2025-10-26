@@ -16,7 +16,9 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background-image: repeating-linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 1.5px, transparent 1.5px, transparent);
+background-size: 49px 49px;
+background-color: #000000e1;
   font-family: Arial, Helvetica, sans-serif;
 }
 

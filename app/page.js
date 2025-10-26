@@ -1,8 +1,6 @@
 import React from "react";
-import { redirect } from 'next/navigation';
-
+import Dashboard from "./Dashboard";
 
 export default function Home() {
-  // This will redirect to the /daily page
-  redirect('/Daily');
+  return <Dashboard />;
 }
