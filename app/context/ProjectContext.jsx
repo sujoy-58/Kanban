@@ -10,7 +10,7 @@ export const ProjectProvider = ({ children }) => {
   const [selectedProject, setSelectedProject] = useState("Craftboard Project");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [favorites, setFavorites] = useState([]);
-  const [currentSection, setCurrentSection] = useState("My Projects");
+  const [currentSection, setCurrentSection] = useState("Workspace");
   const [currentPage, setCurrentPage] = useState("Kanban");
 
   // Default column structure
@@ -98,7 +98,7 @@ const getBreadcrumb = (pathname) => {
   } 
   // ===== Project Pages =====
   else if (currentProjectObj) {
-    const sectionLabel = currentProjectObj.isFavorite ? "Favourite" : "My Projects";
+    const sectionLabel = currentProjectObj.isFavorite ? "Favourite" : "Workspace";
 
     let pathAccumulator = "";
     breadcrumbs = [

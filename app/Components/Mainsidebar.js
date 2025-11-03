@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import {
   FiSearch,
   FiBell,
@@ -97,8 +98,13 @@ const Mainsidebar = () => {
           >
             <AnimatePresence>
               {!isExpanded && (
-                <div className="h-8 w-8 rounded-lg border border-white/50 bg-transparent flex items-center justify-center text-white font-bold">
-                  <MdOutlineTaskAlt />
+                <div className="h-8 w-8 rounded-lg bg-transparent flex items-center justify-center text-white font-bold relative">
+                  <Image
+                    src="/o.png"
+                    alt="7Venday Logo"
+                    width={30}
+                    height={30}
+                  />
                 </div>
               )}
               {isExpanded && (
@@ -110,12 +116,17 @@ const Mainsidebar = () => {
                   transition={{ duration: 0.25, ease: "easeOut" }}
                   className="flex items-center gap-2"
                 >
-                  {/* <div className="h-8 w-8 rounded-lg border border-white/50 bg-transparent flex items-center justify-center text-white font-bold">
-                    Qd
-                  </div> */}
+                <div className="h-8 w-8 rounded-lg bg-transparent flex items-center justify-center text-white font-bold relative">
+                  <Image
+                    src="/o.png"
+                    alt="7Venday Logo"
+                    width={30}
+                    height={30}
+                  />
+                </div>
                   <div>
                     <h2 className="text-white/80 font-semibold text-lg">
-                      QUICK.DO
+                      7VenDay
                     </h2>
                   </div>
                 </motion.div>
@@ -251,7 +262,7 @@ const Mainsidebar = () => {
                             key={project.id}
                             onClick={() => {
                               setSelectedProject(project.name);
-                              navigateToSection("My Projects");
+                              navigateToSection("Workspace");
                             }}
                             className={`flex items-center justify-between group px-2 py-2 rounded-md cursor-pointer transition ${
                               isActive
@@ -297,7 +308,7 @@ const Mainsidebar = () => {
               } border-t border-white/10`}
             />
 
-            {/* ================= MY PROJECTS ================= */}
+            {/* ================= WORKSPACE ================= */}
             <div className={`${isExpanded ? "mt-6" : "mt-2"}`}>
               <div
                 className={`flex items-center ${
@@ -305,7 +316,7 @@ const Mainsidebar = () => {
                 } cursor-pointer mb-2`}
                 onClick={() => {
                   setShowPages(!showPages);
-                  navigateToSection("My Projects");
+                  navigateToSection("Workspace");
                 }}
               >
                 {!isExpanded && <FiFolder className="text-blue-400 text-lg" />}
@@ -319,7 +330,7 @@ const Mainsidebar = () => {
                     className="flex items-center justify-between w-full"
                   >
                     <h3 className="text-[12px] text-white/60 font-medium">
-                      MY PROJECTS
+                      WORKSPACES
                     </h3>
                     {showPages ? (
                       <FiChevronUp className="text-white/60" />
@@ -353,7 +364,7 @@ const Mainsidebar = () => {
                           key={project.id}
                           onClick={() => {
                             setSelectedProject(project.name);
-                            navigateToSection("My Projects");
+                            navigateToSection("Worksspace");
                           }}
                           className={`flex items-center justify-between group px-2 py-2 rounded-md cursor-pointer transition ${
                             isActive

@@ -3,10 +3,11 @@
 import React, { useState } from "react";
 import Mainsidebar from "./Components/Mainsidebar";
 import HeaderSection from "./Components/HeaderSection";
-import Kanban from "./Components/Kanban";
+import Kanban from "./Components/Kanban/Kanban";
 import Calendar from "./Components/Calendar";
 import { useProject } from "./context/ProjectContext";
 import MySpace from "./Components/MySpace/page";
+import Notification from "./Components/Notification/page";
 
 const Dashboard = () => {
   const { 
@@ -20,31 +21,6 @@ const Dashboard = () => {
   } = useProject();
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
 
-  // Get project-specific data
-  // TODO: When implementing backend, replace with API calls:
-  // const [columnTitles, setColumnTitles] = useState({});
-  // const [cards, setCards] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  //
-  // useEffect(() => {
-  //   const loadProjectData = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const response = await fetch(`/api/projects/${selectedProject}/kanban-data`);
-  //       const data = await response.json();
-  //       setColumnTitles(data.columnTitles || defaultColumnTitles);
-  //       setCards(data.cards || []);
-  //     } catch (error) {
-  //       console.error('Error loading project data:', error);
-  //       setColumnTitles(defaultColumnTitles);
-  //       setCards([]);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   loadProjectData();
-  // }, [selectedProject]);
-  
   // Initialize with default values to prevent hydration issues
   const [columnTitles, setColumnTitles] = useState({});
   const [cards, setCards] = useState([]);
@@ -102,12 +78,7 @@ const Dashboard = () => {
 
     if (currentSection === "Notifications") {
       return (
-        <div className="flex flex-col items-center justify-center h-screen text-white/70">
-          <h2 className="text-3xl font-semibold mb-2">Notifications</h2>
-          <p className="text-base text-white/60">
-            Notification center coming soon...
-          </p>
-        </div>
+        <Notification />
       );
     }
 
@@ -141,7 +112,7 @@ const Dashboard = () => {
     }
 
     // ===== Project Pages (with HeaderSection visible) =====
-    if (currentSection === "My Projects") {
+    if (currentSection === "Workspace") {
       if (currentPage === "Kanban") {
         return (
           <Kanban
@@ -176,7 +147,8 @@ const Dashboard = () => {
         filterType={filterType}
         cards={cards}
         setCards={handleCardsChange}
-
+        columnTitles={columnTitles}
+        setColumnTitles={handleColumnTitlesChange}
       />
     );
   };

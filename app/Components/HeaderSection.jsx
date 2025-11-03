@@ -106,12 +106,12 @@ const HeaderSection = ({
   return (
     <div className="w-[98%] flex flex-col gap-4 mb-4 ml-3">
       {/* Breadcrumb */}
-      <Breadcrump /> 
+      {/* <Breadcrump />  */}
 
       {/* Cover Section - Only show in project context */}
       {isInProjectContext && (
         <div
-          className={`relative bg-gradient-to-r ${currentProject.coverColor} rounded-xl px-3 sm:px-4 py-8 sm:py-12 `}
+          className={`relative bg-gradient-to-r ${currentProject.coverColor} rounded-xl px-3 sm:px-4 py-8 sm:py-12 mt-8 `}
         >
           {/* Cover Change Button */}
           <div className="absolute top-3 sm:top-4 right-3 sm:right-4">
